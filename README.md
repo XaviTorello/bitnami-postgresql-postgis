@@ -1,2 +1,5 @@
-# bitnami-postgresql-postgis
-Docker image that provides Bitnami PostgreSQL with a ready to work PostGIS
+# Bitnami Postgresql Postgis
+
+Docker image that provides [Bitnami PostgreSQL](https://github.com/bitnami/bitnami-docker-postgresql) 11 with a ready to work [PostGIS](https://postgis.net)
+
+PostGIS version can be defined using the env `POSTGIS_VERSION`, by default `2.5.3`
