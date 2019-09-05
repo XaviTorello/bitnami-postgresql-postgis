@@ -36,7 +36,6 @@ CREATE EXTENSION address_standardizer_data_us;\n\
 -- Enable US Tiger Geocoder\n\
 CREATE EXTENSION postgis_tiger_geocoder;\n\
 ' >> activate_postgis.sql \
-    && echo 'info "Creating PostGIS extensions"\n' >> setup.sh \
-    && echo 'psql -U postgres -f activate_postgis.sql' >> setup.sh
+    && sed -i 's;postgresql_custom_init_scripts;info "Activating PostGIS extensions"\ncp activate_postgis.sql docker-entrypoint-initdb.d/\npostgresql_custom_init_scripts;g' setup.sh
 
 USER 1001
