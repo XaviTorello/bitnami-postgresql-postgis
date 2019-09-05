@@ -35,8 +35,8 @@ CREATE EXTENSION address_standardizer;\n\
 CREATE EXTENSION address_standardizer_data_us;\n\
 -- Enable US Tiger Geocoder\n\
 CREATE EXTENSION postgis_tiger_geocoder;\n\
-' >> activate_postgis.sql && \
-    echo 'Creating PostGIS extensions' >> setup.sh \
-    echo 'psql -U postgres -f activate_postgis.sql' >> setup.sh
+' >> activate_postgis.sql \
+    && echo 'info "Creating PostGIS extensions"\n' >> setup.sh \
+    && echo 'psql -U postgres -f activate_postgis.sql' >> setup.sh
 
 USER 1001
