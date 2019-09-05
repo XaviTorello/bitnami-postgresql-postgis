@@ -16,4 +16,24 @@ RUN install_packages wget gcc make build-essential libxml2-dev libgeos-dev libpr
     && make \
     && make install 
 
+RUN echo '-- Enable PostGIS (includes raster)\n\
+CREATE EXTENSION postgis;\n\
+-- Enable Topology\n\
+CREATE EXTENSION postgis_topology;\n\
+-- Enable PostGIS Advanced 3D\n\
+-- and other geoprocessing algorithms\n\
+-- sfcgal not available with all distributions\n\
+CREATE EXTENSION postgis_sfcgal;\n\
+-- fuzzy matching needed for Tiger\n\
+CREATE EXTENSION fuzzystrmatch;\n\
+-- rule based standardizer\n\
+CREATE EXTENSION address_standardizer;\n\
+-- example rule data set\n\
+CREATE EXTENSION address_standardizer_data_us;\n\
+-- Enable US Tiger Geocoder\n\
+CREATE EXTENSION postgis_tiger_geocoder;\n\
+' >> activate_postgis.sql && \
+    echo 'Creating PostGIS extensions' >> setup.sh \
+    echo 'psql -U postgres -f activate_postgis.sql' >> setup.sh
+
 USER 1001
