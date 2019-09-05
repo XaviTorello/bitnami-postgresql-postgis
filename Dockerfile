@@ -14,7 +14,10 @@ RUN install_packages wget gcc make build-essential libxml2-dev libgeos-dev libpr
     && tar zxf postgis-*.tar.gz && cd postgis-* \
     && ./configure --with-pgconfig=/opt/bitnami/postgresql/bin/pg_config \
     && make \
-    && make install 
+    && make install \
+    && apt-get remove --purge --auto-remove -y wget build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/postgis*
 
 RUN echo '-- Enable PostGIS (includes raster)\n\
 CREATE EXTENSION postgis;\n\
